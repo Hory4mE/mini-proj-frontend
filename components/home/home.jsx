@@ -77,6 +77,15 @@ export default function Home() {
     }
   };
 
+  const handleLogin = () => {
+    if (isChecked) {
+                saveCredentials();
+              } else {
+                clearCredentials();
+              }
+    // handle username pwd
+  };
+
   const handleRegister = () => {
     navigation.navigate('register');
   };
@@ -125,14 +134,7 @@ export default function Home() {
 
           <TouchableOpacity 
             style={styles.submitBtn} 
-            onPress={() => {
-              if (isChecked) {
-                saveCredentials();
-              } else {
-                clearCredentials();
-              }
-              
-            }}
+            onPress={handleLogin}
           >
             <Text style={styles.submitText}>เข้าสู่ระบบ</Text>
           </TouchableOpacity>
