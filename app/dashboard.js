@@ -3,9 +3,9 @@ import { SafeAreaView, Text } from "react-native";
 import { Stack, useRouter } from "expo-router";
 
 import { COLORS } from "../constants";
-import Registerpage from "../components/register/register";
+import Dashboard from "../components/dashboard/dashboard";
 
-const Register = () => {
+const dashboard = () => {
   return (
     <SafeAreaView
       style={{
@@ -22,9 +22,9 @@ const Register = () => {
         }}
       />
 
-      <Registerpage />
+      <Dashboard />
     </SafeAreaView>
   );
 };
 
-export default Register;
+export default dashboard;

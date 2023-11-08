@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from '@react-navigation/native'; 
+import { Dimensions } from "react-native";
+import axios from "axios";
 import {
   Animated,
-  SafeAreaView,
   View,
   Image,
   TouchableOpacity,
@@ -12,18 +13,21 @@ import {
 } from "react-native";
 
 import styles from "./home.style";
-import { COLORS, images } from "../../constants";
-import { Dimensions } from "react-native";
+import { COLORS, api, images } from "../../constants";
+
 import CircularCheckbox from "../common/card/checkbox/CircularCheckbox";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function Home() {
   const navigation = useNavigation();
+
+  // const { data, isLoading, error} = useFetch();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
 
-  const { height, width } = Dimensions.get("window");
+  const { width } = Dimensions.get("window");
   const imageSize = 0.30 * width;
   const fadeInOutAnimation = useRef(new Animated.Value(0)).current;
 
@@ -77,24 +81,38 @@ export default function Home() {
     }
   };
 
-  const handleLogin = () => {
-    if (isChecked) {
-                saveCredentials();
-              } else {
-                clearCredentials();
-              }
-    // handle username pwd
+  const loginHandler = async () => {
+    
+    try {
+      const response = await axios.post(`${api.api}SmartCanteen/store/login`, {
+        username: username,
+        password: password
+      });
+      if (response.status === 200) {
+        const data = response.data;
+        navigation.navigate("dashboard", {
+            responseData: data,
+        });
+
+      }
+
+    } catch (error) {
+      console.error('Authentication failed:', error);
+    }
+
   };
 
-  const handleRegister = () => {
+
+  const registerPress = () => {
     navigation.navigate('register');
   };
 
 
   return (
-    <SafeAreaView style={styles.container(height, width)}>
+    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
       <Animated.View style={styles.animatedContainer(fadeInOutAnimation)}>
         <Image source={images.logo} style={styles.logo(imageSize)} resizeMode="contain" />
+
         <Text style={styles.header}>เข้าสู่ระบบสำหรับร้านค้า</Text>
 
           <View style={styles.textContainer}>
@@ -134,16 +152,16 @@ export default function Home() {
 
           <TouchableOpacity 
             style={styles.submitBtn} 
-            onPress={handleLogin}
+            onPress={loginHandler}
           >
             <Text style={styles.submitText}>เข้าสู่ระบบ</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={handleRegister}>
-          <Text style={styles.registerText}>ลงทะเบียน</Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={registerPress}>
+            <Text style={styles.registerText}>ลงทะเบียน</Text>
+          </TouchableOpacity>
 
       </Animated.View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }

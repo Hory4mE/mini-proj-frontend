@@ -2,18 +2,13 @@ import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native";
 import { Stack, useRouter } from "expo-router";
 
-const Register = () => {
+
+const Dashboard = () => {
 
   return (
-    <SafeAreaView>
-      <Stack.Screen
-        options={{
-          headerShown: true,
-        }}
-      />
-
-    </SafeAreaView>
+    <View>
+    </View>
   );
 };
 
-export default Register;
+export default Dashboard;

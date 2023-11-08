@@ -3,20 +3,24 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, TextInput } from 'reac
 import { COLORS, FONT, icons } from '../../../../constants';
 import { color } from 'react-native-reanimated';
 
-const InputContainer = ({ name,requir,placeholder,onValueChange }) => {
+const InputContainer = ({ name,required,placeholder,onValueChange }) => {
   const [inputValue, setInputValue] = useState("");
+  const [isNameValid, setIsNameValid] = useState(true);
+
   const handleInputChange = (text) => {
     setInputValue(text);
-    onValueChange(text);
+    // if(required){
+      setIsNameValid(text.trim() != "");
+    // }
   };
   
   return (
-    <View >
+    <View style={styles.container}>
         <View style={styles.textContainer}>
           <Text style={styles.text}>{name}</Text>
           <Text style={styles.start}> *</Text>
         </View>
-        <View style={styles.inputContainer}>
+        <View style={styles.inputContainer(isNameValid)}>
           <TextInput
               style={styles.inputText}
               value={inputValue}
@@ -25,11 +29,16 @@ const InputContainer = ({ name,requir,placeholder,onValueChange }) => {
               placeholderTextColor={COLORS.gray}
           />
         </View>
+        {!isNameValid && <Text style={styles.errorText}>กรุณากรอก{name}</Text>}
+
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container:{
+    marginBottom:18
+  },
   textContainer:{
     flexDirection: 'row',
   },
@@ -46,13 +55,18 @@ const styles = StyleSheet.create({
     fontFamily: FONT.bold,
     color: '#ff0000',
   },
-  inputContainer: {
+  inputContainer: (noText) => ({
     width: "100%",
     borderWidth: 1,
-    borderColor: COLORS.gray,
+    borderColor: noText ? COLORS.gray : 'red',
     borderRadius: 10,
     padding: 8,
-    marginBottom:18
+  }),
+  errorText: {
+    color: 'red',
+    fontFamily:FONT.regular,
+    fontSize: 12,
+
   },
 });
 

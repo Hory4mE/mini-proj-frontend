@@ -19,9 +19,9 @@ const Home = () => {
   return (
     <SafeAreaView
       style={{
-        flex: 1,
-        backgroundColor: COLORS.white,
+        flex: 2,
         height: "100%",
+        backgroundColor: COLORS.white,
       }}
     >
       <Stack.Screen

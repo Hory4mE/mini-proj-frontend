@@ -2,16 +2,16 @@ import { StyleSheet } from "react-native";
 import { COLORS, FONT } from "../../constants";
 
 const styles = StyleSheet.create({
-  container: (h, w) => ({
+  container: {
     width: "100%",
-    height: "100%",
-  }),
+    minHeight: "100%",
+    paddingVertical: 32,
+  },
   animatedContainer: (fadeAnimation) => ({
     height: "100%",
     opacity: fadeAnimation,
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor: "red",
   }),
   header: {
     fontFamily: FONT.regular,

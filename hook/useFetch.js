@@ -9,7 +9,7 @@ const useFetch = (endpoint, query) => {
 
   const options = {
     method: "GET",
-    url: `http://${api}/api/herbs/${endpoint}`,
+    url: `${api.api}SmartCanteen/store/${endpoint}`,
     params: { ...query },
   };
 
@@ -21,14 +21,11 @@ const useFetch = (endpoint, query) => {
       setData(response.data.data);
     } catch (error) {
       if (error.response) {
-        // The request was made, but the server responded with an error status code
-        console.error("Server responded with an error:", error.response.data);
+        setError("Server responded with an error:", error.response.data);
       } else if (error.request) {
-        // The request was made, but no response was received
-        console.error("No response received from the server.");
+        setError("No response received from the server.");
       } else {
-        // Something else happened while setting up the request
-        console.error("Error123:", error.message);
+        setError("Error:", error.message);
       }
     } finally {
       setIsLoading(false);
@@ -39,12 +36,7 @@ const useFetch = (endpoint, query) => {
     fetchData();
   }, []);
 
-  const refetch = () => {
-    setIsLoading(true);
-    fetchData();
-  };
-
-  return { data, isLoading, error, refetch };
+  return { data, isLoading, error };
 };
 
 export default useFetch;
