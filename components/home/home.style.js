@@ -33,11 +33,11 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     marginLeft: "10%",
   },
-  textInput: {
+  inputText: {
     fontFamily: FONT.regular,
     fontSize: 16,
   },
-  textContainer: {
+  inputContainer: {
     width: "80%",
     borderWidth: 1,
     borderColor: COLORS.gray,

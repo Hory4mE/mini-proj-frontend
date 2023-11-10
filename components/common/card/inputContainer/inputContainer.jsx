@@ -3,22 +3,26 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, TextInput } from 'reac
 import { COLORS, FONT, icons } from '../../../../constants';
 import { color } from 'react-native-reanimated';
 
-const InputContainer = ({ name,required,placeholder,onValueChange }) => {
+const InputContainer = ({ name,requir,secureTextEntry,placeholder,onValueChange,error}) => {
   const [inputValue, setInputValue] = useState("");
   const [isNameValid, setIsNameValid] = useState(true);
 
   const handleInputChange = (text) => {
     setInputValue(text);
-    // if(required){
+    if(requir){
       setIsNameValid(text.trim() != "");
-    // }
+    }
+    if (onValueChange) {
+      onValueChange(text);
+    }
   };
+  
   
   return (
     <View style={styles.container}>
         <View style={styles.textContainer}>
           <Text style={styles.text}>{name}</Text>
-          <Text style={styles.start}> *</Text>
+          {requir ? <Text style={styles.start}> *</Text>:<Text></Text>}
         </View>
         <View style={styles.inputContainer(isNameValid)}>
           <TextInput
@@ -27,9 +31,10 @@ const InputContainer = ({ name,required,placeholder,onValueChange }) => {
               onChangeText={handleInputChange}
               placeholder={placeholder}
               placeholderTextColor={COLORS.gray}
+              secureTextEntry={secureTextEntry}
           />
         </View>
-        {!isNameValid && <Text style={styles.errorText}>กรุณากรอก{name}</Text>}
+        {!isNameValid && <Text style={styles.errorText}>{error ? error : `กรุณากรอก${name}`}</Text>}
 
     </View>
   );

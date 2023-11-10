@@ -2,20 +2,25 @@ import { StyleSheet } from "react-native";
 import { COLORS, FONT } from "../../constants";
 
 const styles = StyleSheet.create({
-  container: (f) => ({
-    flex: f,
+  container: {
     minheight: "100%",
     marginHorizontal: 16,
     justifyContent: "space-between",
-  }),
+  },
   header: {
     fontFamily: FONT.regular,
     fontSize: 16,
     marginBottom: 12,
   },
-
   textContainer: {
     flexDirection: "row",
+  },
+  inputContainer: {
+    borderWidth: 1,
+    borderColor: COLORS.gray,
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 18,
   },
   text: {
     fontFamily: FONT.bold,
@@ -58,11 +63,12 @@ const styles = StyleSheet.create({
     borderColor: COLORS.gray,
     borderRadius: 10,
     padding: 8,
+    marginBottom: 10,
   },
   line: {
     borderBottomWidth: 1,
     borderBottomColor: COLORS.lightGray,
-    marginVertical: 10,
+    marginBottom: 10,
   },
   bottomContainer: {
     height: 32,

@@ -58,10 +58,9 @@ export default function Home() {
       const savedUsername = await AsyncStorage.getItem('username');
       const savedPassword = await AsyncStorage.getItem('password');
       if (savedUsername !== null && savedPassword !== null) {
-        // Username and password found in storage, set them in the state
         setUsername(savedUsername);
         setPassword(savedPassword);
-        setIsChecked(true); // Check the "Remember Password" checkbox
+        setIsChecked(true);
       }
     } catch (error) {
       console.error('Error loading credentials:', error);
@@ -72,7 +71,6 @@ export default function Home() {
     try {
       await AsyncStorage.removeItem('username');
       await AsyncStorage.removeItem('password');
-      console.log('Credentials deleted successfully.');
       setUsername('');
       setPassword('');
       setIsChecked(false);
@@ -90,6 +88,11 @@ export default function Home() {
       });
       if (response.status === 200) {
         const data = response.data;
+        if (isChecked) {
+                saveCredentials();
+              } else {
+                clearCredentials();
+              }
         navigation.navigate("dashboard", {
             responseData: data,
         });
@@ -115,21 +118,21 @@ export default function Home() {
 
         <Text style={styles.header}>เข้าสู่ระบบสำหรับร้านค้า</Text>
 
-          <View style={styles.textContainer}>
+          <View style={styles.inputContainer}>
             <TextInput
-              style={styles.textInput}
+              style={styles.inputText}
               value={username}
               onChangeText={(text) => {
                 setUsername(text);
               }}
-              placeholder={"ชื่อร้าน หรือ เบอร์โทรศัพท์" }
+              placeholder={"ชื่อผู้ใช้งาน หรือ เบอร์โทรศัพท์" }
               placeholderTextColor={COLORS.gray}
             />
           </View>
           <View style={{height:20}}></View>
-          <View style={styles.textContainer}>
+          <View style={styles.inputContainer}>
             <TextInput
-              style={styles.textInput}
+              style={styles.inputText}
               value={password}
               onChangeText={(text) => {
                 setPassword(text);
