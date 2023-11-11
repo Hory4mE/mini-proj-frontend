@@ -29,8 +29,8 @@ const Register = () => {
     const [qrcodeImageChangeText, setQRcodeImageChangeText] = useState("เลือกรูปภาพ");
     const { height, width } = Dimensions.get("window");
         
-    imageHeight = 0.2 * height;
-    imageWidth = 0.8 * width;
+    const imageHeight = 0.2 * height;
+    const imageWidth = 0.8 * width;
     
 
 
@@ -99,7 +99,7 @@ const Register = () => {
             });
 
             if (response.status === 200) {
-                showSuccessPopup();
+                popup("ลงทะเบียนสำเร็จ","ร้านคุณได้ลงทะเบียนเรียบร้อยแล้ว");
                 navigation.navigate("home");
 
             }
@@ -109,10 +109,10 @@ const Register = () => {
         }
     };
 
-    const showSuccessPopup = () => {
+    const popup = (title,text) => {
         Alert.alert(
-            "ลงทะเบียนสำเร็จ",
-            "ร้านคุณได้ลงทะเบียนเรียบร้อยแล้ว!",
+            title,
+            text,
             [
                 {
                     text: "OK",
@@ -197,7 +197,7 @@ const Register = () => {
                         </View>
                         {(qrcodeImage) ? <Image
                             source={{ uri: qrcodeImage }}
-                            style={styles.image(imageHeight, imageWidth)}
+                            style={styles.image(imageHeight*1.5, imageHeight*1.25)}
                             resizeMode="cover"
                             /> : <View></View>
                         }

@@ -2,9 +2,6 @@ import "expo-router/entry";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
-import Home from "./components/home/home";
-import Register from "./components/register/register";
-
 const Stack = createStackNavigator();
 
 // function App() {

@@ -78,30 +78,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
   bottomText: {
     fontFamily: FONT.bold,
     fontSize: 16,
     color: COLORS.white,
-  },
-  container2: {
-    // React Native does not use text-align; you can use alignItems to center
-    alignItems: "center",
-  },
-  rectangle: {
-    // These are React Native styles
-    width: 564,
-    height: 43.27,
-    borderWidth: 2,
-    borderColor: "rgba(255, 255, 255, 1)",
-    borderRadius: 15,
-  },
-  icon: {
-    padding: 10,
-  },
-  text_box_input: {
-    // These are React Native styles
-    margin: 10,
   },
 });
 

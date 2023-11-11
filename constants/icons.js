@@ -5,6 +5,7 @@ import editshop from "../assets/icons/editshop.png";
 import fork from "../assets/icons/fork.png";
 import history from "../assets/icons/history.png";
 import menu from "../assets/icons/menu.png";
+import open from "../assets/icons/open.png";
 import pencil from "../assets/icons/pencil.png";
 import rightArrow from "../assets/icons/right-arrow.png";
 import sort from "../assets/icons/sort.png";
@@ -19,6 +20,7 @@ export default {
   fork,
   history,
   menu,
+  open,
   pencil,
   rightArrow,
   sort,

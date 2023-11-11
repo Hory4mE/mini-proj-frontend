@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from '@react-navigation/native'; 
-import { Dimensions } from "react-native";
+import { Alert, Dimensions } from "react-native";
 import axios from "axios";
 import {
   Animated,
@@ -21,10 +21,10 @@ import { ScrollView } from "react-native-gesture-handler";
 export default function Home() {
   const navigation = useNavigation();
 
-  // const { data, isLoading, error} = useFetch();
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginText, setLoginText] = useState("เข้าสู่ระบบ");
+
   const [isChecked, setIsChecked] = useState(false);
 
   const { width } = Dimensions.get("window");
@@ -46,8 +46,6 @@ export default function Home() {
     try {
       await AsyncStorage.setItem('username', username);
       await AsyncStorage.setItem('password', password);
-      console.log(username,password)
-      console.log('Credentials saved successfully.');
     } catch (error) {
       console.error('Error saving credentials:', error);
     }
@@ -80,7 +78,7 @@ export default function Home() {
   };
 
   const loginHandler = async () => {
-    
+    setLoginText("กรุณารอสักครู่...");
     try {
       const response = await axios.post(`${api.api}SmartCanteen/store/login`, {
         username: username,
@@ -93,6 +91,7 @@ export default function Home() {
               } else {
                 clearCredentials();
               }
+        setLoginText("เข้าสู่ระบบ");
         navigation.navigate("dashboard", {
             responseData: data,
         });
@@ -109,6 +108,16 @@ export default function Home() {
   const registerPress = () => {
     navigation.navigate('register');
   };
+
+  const popup = (title,text) => {
+        Alert.alert(
+            title,
+            text,
+            [
+            ],
+            { cancelable: true }
+        );
+    };  
 
 
   return (
@@ -157,7 +166,7 @@ export default function Home() {
             style={styles.submitBtn} 
             onPress={loginHandler}
           >
-            <Text style={styles.submitText}>เข้าสู่ระบบ</Text>
+            <Text style={styles.submitText}>{loginText}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={registerPress}>

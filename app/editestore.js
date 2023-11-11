@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import { SafeAreaView, Text } from "react-native";
 import { Stack, useRouter } from "expo-router";
 
 import { COLORS } from "../constants";
-import Dashboard from "../components/dashboard/dashboard";
 
-const dashboard = () => {
+const editestore = () => {
   return (
     <SafeAreaView
       style={{
+        flex: 2,
         height: "100%",
         backgroundColor: COLORS.white,
       }}
     >
       <Stack.Screen
         options={{
-          headerShown: false,
+          headerTitle: "",
+          headerShadowVisible: false,
+          headerShown: true,
         }}
       />
 
-      <Dashboard />
+      <Text>editestore</Text>
     </SafeAreaView>
   );
 };
 
-export default dashboard;
+export default editestore;

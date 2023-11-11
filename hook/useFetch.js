@@ -9,10 +9,9 @@ const useFetch = (endpoint, query) => {
 
   const options = {
     method: "GET",
-    url: `${api.api}SmartCanteen/store/${endpoint}`,
-    params: { ...query },
+    url: `${api.api}SmartCanteen/store/dashboard`,
+    params: query,
   };
-
   const fetchData = async () => {
     setIsLoading(true);
 

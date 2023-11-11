@@ -5,7 +5,6 @@ import { Stack, useRouter } from "expo-router";
 import { COLORS } from "../constants";
 import ComingScreen from "../components/comingScreen/comingScreen";
 import Homepage from "../components/home/home";
-import Dashboard from "../components/dashboard/dashboard";
 
 const Home = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -32,27 +31,6 @@ const Home = () => {
       />
 
       {showSplash ? <ComingScreen /> : <Homepage />}
-    </SafeAreaView>
-  );
-
-  // go Dashboard for easy for dev
-  return (
-    <SafeAreaView
-      style={{
-        flex: 2,
-        height: "100%",
-        backgroundColor: COLORS.white,
-      }}
-    >
-      <Stack.Screen
-        options={{
-          headerTitle: "",
-          headerShadowVisible: false,
-          headerShown: true,
-        }}
-      />
-
-      <Dashboard />
     </SafeAreaView>
   );
 };
