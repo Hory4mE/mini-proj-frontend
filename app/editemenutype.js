@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, Text } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 import { Stack, useRouter } from "expo-router";
 
 import { COLORS, FONT } from "../constants";
-import Menuoption from "../components/menuoption/menuoption";
+import EditeMenuType from "../components/editemenutype/editemenutype";
 
-const menu_option = () => {
+const menutype = (text) => {
   return (
     <SafeAreaView
       style={{
-        flex: 2,
         height: "100%",
         backgroundColor: COLORS.white,
       }}
     >
       <Stack.Screen
         options={{
-          headerTitle: "เมนู/ตัวเลือก",
+          headerTitle: "หมวดหมู่รายการสินค้า",
           headerTitleStyle: {
             fontFamily: FONT.bold,
             fontSize: 20,
@@ -26,9 +25,9 @@ const menu_option = () => {
         }}
       />
 
-      <Menuoption />
+      <EditeMenuType />
     </SafeAreaView>
   );
 };
 
-export default menu_option;
+export default menutype;

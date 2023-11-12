@@ -24,6 +24,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: COLORS.white,
   }),
+  timeText: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
   text: (color) => ({
     fontFamily: FONT.bold,
     fontSize: 16,
@@ -44,14 +49,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: color ? color : COLORS.black,
   }),
-  headeContainer: {
+  headeContainer: (h, w) => ({
     width: "100%",
-    height: "25%",
     position: "absolute",
     justifyContent: "flex-start",
-    paddingTop: "30%",
-    paddingLeft: "4%",
-  },
+    top: h,
+    left: w,
+  }),
   orderContainer: (h) => ({
     width: "80%",
     flexDirection: "row",
@@ -67,10 +71,15 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
   },
-  iconContainer: {
-    width: "100%",
+  iconRow: {
     flexDirection: "row",
     marginTop: 32,
+    marginHorizontal: "7%",
+  },
+  iconContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    paddingHorizontal: "4%",
   },
   iconbg: (w) => ({
     width: w,
@@ -79,7 +88,6 @@ const styles = StyleSheet.create({
     borderRadius: 1000,
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: "5%",
   }),
   icon: {
     width: "70%",

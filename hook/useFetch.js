@@ -9,7 +9,7 @@ const useFetch = (endpoint, query) => {
 
   const options = {
     method: "GET",
-    url: `${api.api}SmartCanteen/store/dashboard`,
+    url: `${api.api}SmartCanteen/store/${endpoint}`,
     params: query,
   };
   const fetchData = async () => {
@@ -35,7 +35,12 @@ const useFetch = (endpoint, query) => {
     fetchData();
   }, []);
 
-  return { data, isLoading, error };
+  const refetch = () => {
+    setIsLoading(true);
+    fetchData();
+  };
+
+  return { data, isLoading, error, refetch };
 };
 
 export default useFetch;

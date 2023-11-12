@@ -91,7 +91,6 @@ export default function Home() {
               } else {
                 clearCredentials();
               }
-        setLoginText("เข้าสู่ระบบ");
         navigation.navigate("dashboard", {
             responseData: data,
         });
@@ -101,6 +100,9 @@ export default function Home() {
     } catch (error) {
       console.error('Authentication failed:', error);
     }
+    finally{
+      setLoginText("เข้าสู่ระบบ");
+    }
 
   };
 
@@ -108,17 +110,6 @@ export default function Home() {
   const registerPress = () => {
     navigation.navigate('register');
   };
-
-  const popup = (title,text) => {
-        Alert.alert(
-            title,
-            text,
-            [
-            ],
-            { cancelable: true }
-        );
-    };  
-
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>

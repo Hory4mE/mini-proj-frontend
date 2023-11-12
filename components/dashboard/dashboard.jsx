@@ -37,7 +37,9 @@ const Dashboard = () => {
   };
 
   const iconPress = (path) => {
-    navigation.navigate(path);
+    navigation.navigate(path, {
+      storeid: storeid
+    });
   };
 
   return (
@@ -55,7 +57,7 @@ const Dashboard = () => {
                 style={{ width: width, height: bgHeight, borderBottomRightRadius: 12, borderBottomLeftRadius: 12 }}
                 resizeMode="cover"
               />
-              <View style={styles.headeContainer}>
+              <View style={styles.headeContainer(height*0.125,width*0.04)}>
                 <Text style={styles.headerText(COLORS.lightGray)}>{store_name}</Text>
                 <Text style={styles.littleText(COLORS.lightGray)}>{store_locate}</Text>
               </View>
@@ -65,7 +67,7 @@ const Dashboard = () => {
           )}
           <View style={styles.timeContainer(height * 0.045)}>
             <TouchableOpacity 
-              style={{ flexDirection: "row" }} onPress={() => { navigation.path("timesetting") }}>
+              style={styles.timeText} onPress={() => { navigation.navigate("timesetting") }}>
               {open_time && close_time ? (
                 <>
                   <Text style={styles.text(COLORS.primary)}>เปิดรับออเดอร์ </Text>
@@ -77,20 +79,23 @@ const Dashboard = () => {
               <Text style={styles.text(COLORS.lightGray)}> | เปลี่ยน</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.orderContainer(height * 0.045)}>
+          <TouchableOpacity 
+            style={styles.orderContainer(height * 0.045)}
+            onPress={() => iconPress("order")}
+          >
             <Text style={styles.text(COLORS.white)}>รายการอาหารที่สั่งเข้ามา</Text>
             <Image
               source={icons.rightArrow}
               style={styles.rightArrow}
               resizeMode="cover"
             />
-          </View>
-          <View>
+          </TouchableOpacity>
+          <View style={{width:"100%"}}>
             {groupIconsIntoSetsOfFour(iconsData).map((iconSet, index) => (
-              <View key={index} style={styles.iconContainer}>
+              <View key={index} style={styles.iconRow}>
                 {iconSet.map((item, subIndex) => (
                   <TouchableOpacity 
-                    style={{flexDirection: 'column' ,alignItems: 'center'}}
+                    style={styles.iconContainer}
                     onPress={() => iconPress(item.path)}
                     key={subIndex}
                   >

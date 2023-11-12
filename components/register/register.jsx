@@ -27,6 +27,8 @@ const Register = () => {
 
     const [storeImageChangeText, setStoreImageChangeText] = useState("เลือกรูปภาพ");
     const [qrcodeImageChangeText, setQRcodeImageChangeText] = useState("เลือกรูปภาพ");
+    const [registerText, setRegisterText] = useState("ลงทะเบียน");
+
     const { height, width } = Dimensions.get("window");
         
     const imageHeight = 0.2 * height;
@@ -42,6 +44,7 @@ const Register = () => {
     ];
 
     const pickImage = async (imageType) => {
+        setRegisterText("กำลังลงทะเบียน ...")
         try {
             const data = await ImagePicker.launchImageLibraryAsync({
                 mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -58,6 +61,9 @@ const Register = () => {
             }
         } catch (error) {
             console.error(error);
+        }
+        finally{
+            setRegisterText("ลงทะเบียน")
         }
     };
 
@@ -98,7 +104,7 @@ const Register = () => {
                 },
             });
 
-            if (response.status === 200) {
+            if (response.status === 201) {
                 popup("ลงทะเบียนสำเร็จ","ร้านคุณได้ลงทะเบียนเรียบร้อยแล้ว");
                 navigation.navigate("home");
 
